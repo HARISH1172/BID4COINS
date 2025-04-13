@@ -1,0 +1,20 @@
+{
+  "name": "mern_stack_auction_platform",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zeeshu911/MERN_Stack_Auction_Platform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zeeshu911/MERN_Stack_Auction_Platform/issues"
+  },
+  "homepage": "https://github.com/Zeeshu911/MERN_Stack_Auction_Platform#readme"
+}
