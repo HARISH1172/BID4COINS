@@ -238,7 +238,6 @@ const SignUp = () => {
                     onChange={(e) => setPaypalEmail(e.target.value)}
                     className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none sm:flex-1"
                     disabled={role === "Bidder"}
-                    required
                   />
                 </div>
               </div>

@@ -98,7 +98,7 @@ export const register = (data) => async (dispatch) => {
         headers: { "Content-Type": "multipart/form-data" },
       }
     );
-    console.log(response)
+  
     dispatch(userSlice.actions.registerSuccess(response.data));
     toast.success(response.data.message);
     dispatch(userSlice.actions.clearAllErrors());
