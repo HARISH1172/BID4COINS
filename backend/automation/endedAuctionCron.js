@@ -47,11 +47,20 @@ export const endedAuctionCron = () => {
             { new: true }
           );
           const subject = `Congratulations! You won the auction for ${auction.title}`;
-          const message = `Dear ${bidder.userName}, \n\nCongratulations! You have won the auction for ${auction.title}. \n\nBefore proceeding for payment contact your auctioneer via your auctioneer email:${auctioneer.email} \n\nPlease complete your payment using one of the following methods:\n\n1. **Bank Transfer**: \n- Account Name: ${auctioneer.paymentMethods.bankTransfer.bankAccountName} \n- Account Number: ${auctioneer.paymentMethods.bankTransfer.bankAccountNumber} \n- Bank: ${auctioneer.paymentMethods.bankTransfer.bankName}\n\n2. **Easypaise**:\n- You can send payment via Easypaise: ${auctioneer.paymentMethods.UPI.UPIAccountNumber}\n\n3. **PayPal**:\n- Send payment to: ${auctioneer.paymentMethods.paypal.paypalEmail}\n\n4. **Cash on Delivery (COD)**:\n- If you prefer COD, you must pay 20% of the total amount upfront before delivery.\n- To pay the 20% upfront, use any of the above methods.\n- The remaining 80% will be paid upon delivery.\n- If you want to see the condition of your auction item then send your email on this: ${auctioneer.email}\n\nPlease ensure your payment is completed by [Payment Due Date]. Once we confirm the payment, the item will be shipped to you.\n\nThank you for participating!\n\nBest regards,\nZeeshu Auction Team`;
+          const message = `Dear ${bidder.userName}, \n\nCongratulations! You have won the auction for ${auction.title}. \n\nBefore proceeding for payment contact your auctioneer via your auctioneer email:${auctioneer.email} \n\nPlease complete your payment using one of the following methods:\n\n1. **Bank Transfer**: \n- Account Name: ${auctioneer.paymentMethods.bankTransfer.bankAccountName} \n- Account Number: ${auctioneer.paymentMethods.bankTransfer.bankAccountNumber} \n- Bank: ${auctioneer.paymentMethods.bankTransfer.bankName}\n\n2. **Easypaise**:\n- You can send payment via Easypaise: ${auctioneer.paymentMethods.UPI.UPIAccountNumber}\n\n3. **PayPal**:\n- Send payment to: ${auctioneer.paymentMethods.paypal.paypalEmail}\n\n4. **Cash on Delivery (COD)**:\n- If you prefer COD, you must pay 20% of the total amount upfront before delivery.\n- To pay the 20% upfront, use any of the above methods.\n- The remaining 80% will be paid upon delivery.\n- If you want to see the condition of your auction item then send your email on this: ${auctioneer.email}\n\nPlease ensure your payment is completed by [Payment Due Date]. Once we confirm the payment, the item will be shipped to you.\n\nThank you for participating!`;
           console.log("SENDING EMAIL TO HIGHEST BIDDER");
+
+          const auctioneerSubject = `Auction ended for ${auction.title}`;
+          // message to auctioneer with commission amount and UPI ID 7796895437@superyes send commission amount to this UPI ID to run futher auction
+          const auctioneerMessage = `Dear ${auctioneer.userName}, \n\nThe auction for ${auction.title} has ended. \n\nThe highest bidder is ${bidder.userName} with a bid of ${highestBidder.amount}. \n\nPlease contact the bidder to finalize the payment and delivery details.\n\nAlso, please note that your commission amount is: ${commissionAmount} INR. \n\nKindly pay the commision amount to "7796895437@superyes" this UPI ID.\n\n\nThank you for using our platform!\n`;
+
           sendEmail({ email: bidder.email, subject, message });
-          // sendEmail({ email: auctioneer.email, subject, message }); //TODO
-          
+          sendEmail({
+            email: auctioneer.email,
+            auctioneerSubject,
+            auctioneerMessage,
+          });
+
           console.log("SUCCESSFULLY EMAIL SEND TO HIGHEST BIDDER");
         } else {
           await auction.save();
